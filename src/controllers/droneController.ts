@@ -22,6 +22,19 @@ class DroneController {
             res.status(500).send({ error: 'Internal Server Error' });
         }
     }
+
+    async loadMedications(req: Request, res: Response) {
+        const { droneSerialNumber, medicationIds } = req.body;
+        try {
+            const message = await DroneService.loadMedications(droneSerialNumber, medicationIds);
+            res.status(200).send({ message });
+        } catch (error) {
+            console.error('Error loading medication:', error);
+            res.status(500).send({ error: 'Internal Server error' });
+        }
+    }
+
+
 }
 
 export default new DroneController();

@@ -1,4 +1,3 @@
-// medicationService.ts
 import Medication, { MedicationInput, MedicationOutput } from '../models/MedicationModel';
 import { medicationSchema } from '../utils/validation';
 

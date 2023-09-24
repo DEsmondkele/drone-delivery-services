@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "dev": "nodemon App.ts",
+    "build": "npx tsc",
+    "test": "mocha --require ts-node/register src/tests/**/*.test.ts"
   },
   "dependencies": {
     "body-parser": "^1.19.1",

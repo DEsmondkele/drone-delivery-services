@@ -1,5 +1,7 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import { sequelize } from '../config';
+import Medication from './MedicationModel'; // Import the Medication model
+import AuditLog from './AuditLog';
 
 interface DroneAttributes {
     serialNumber: string;
@@ -18,6 +20,16 @@ class Drone extends Model<DroneAttributes, DroneInput> implements DroneAttribute
     public batteryCapacity!: number;
     public state!: string;
 }
+
+Drone.hasMany(Medication,{
+        foreignKey: 'droneSerialNumber',
+        as: 'medications',
+    });
+
+Drone.hasMany(AuditLog, {
+        foreignKey: 'droneSerialNumber',
+        as: 'auditLogs',
+    });
 
 Drone.init(
     {
@@ -42,12 +54,12 @@ Drone.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // ... other attributes
+
     },
     {
         timestamps: true,
         sequelize,
-        paranoid: true, // If you want soft deletes
+        paranoid: true,
         modelName: 'Drone',
     }
 );
