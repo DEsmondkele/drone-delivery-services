@@ -17,6 +17,7 @@ class Drone extends Model<DroneAttributes> implements DroneAttributes {
     public weightLimit!: number;
     public batteryCapacity!: number;
     public state!: string;
+    medication: Medication | null;
 }
 
 Drone.init({
@@ -52,9 +53,9 @@ Drone.init({
     modelName: 'Drone',
 });
 
-// Drone.hasOne(Medication, {
-//     foreignKey: 'medicationId',
-//     as: 'medication',
-// });
+Drone.hasOne(Medication, {
+    foreignKey: 'medicationId',
+    as: 'medication',
+});
 
 export default Drone;

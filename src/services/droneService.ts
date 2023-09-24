@@ -74,10 +74,10 @@ class DroneService {
     async getLoadedMedications(droneSerialNumber: string) {
         try {
             // Find the drone by serial number
-            const drone = await Drone.findOne({
-                where: { serialNumber: droneSerialNumber },
+            const [drone] = await Promise.all([Drone.findOne({
+                where: {serialNumber: droneSerialNumber},
                 include: [Medication], // Include associated medications
-            });
+            })]);
 
             if (!drone) {
                 throw new Error('Drone not found');

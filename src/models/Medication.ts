@@ -39,9 +39,9 @@ Medication.init({
     modelName: 'Medication',
 });
 
-// Medication.belongsTo(Drone, {
-//     foreignKey: 'droneId',
-//     as: 'drones',
-// });
+Medication.belongsTo(Drone, {
+    foreignKey: 'droneId',
+    as: 'drones',
+});
 
 export default Medication;
