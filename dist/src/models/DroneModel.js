@@ -5,18 +5,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const config_1 = require("../config");
-const MedicationModel_1 = __importDefault(require("./MedicationModel")); // Import the Medication model
 const AuditLog_1 = __importDefault(require("./AuditLog"));
 class Drone extends sequelize_1.Model {
+    static associate(models) {
+        Drone.hasOne(AuditLog_1.default, {
+            foreignKey: 'droneSerialNumber',
+            as: 'auditLogs',
+        });
+        Drone.belongsToMany(models.Medication, {
+            through: 'DroneMedication',
+            foreignKey: 'droneSerialNumber',
+            as: 'medications',
+        });
+    }
 }
-Drone.hasMany(MedicationModel_1.default, {
-    foreignKey: 'droneSerialNumber',
-    as: 'medications',
-});
-Drone.hasMany(AuditLog_1.default, {
-    foreignKey: 'droneSerialNumber',
-    as: 'auditLogs',
-});
 Drone.init({
     serialNumber: {
         type: sequelize_1.DataTypes.STRING,

@@ -4,9 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.medicationSchema = exports.droneSchema = void 0;
-// validation.ts
 const joi_1 = __importDefault(require("joi"));
-// Define validation schemas for request bodies
+// validation schemas for request bodies
 const droneSchema = joi_1.default.object({
     serialNumber: joi_1.default.string().max(100).required(),
     model: joi_1.default.string().valid('Lightweight', 'Middleweight', 'Cruiserweight', 'Heavyweight').required(),

@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// medicationService.ts
 const MedicationModel_1 = __importDefault(require("../models/MedicationModel"));
 const validation_1 = require("../utils/validation");
 class MedicationService {

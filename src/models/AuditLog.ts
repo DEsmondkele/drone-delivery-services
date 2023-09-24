@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../config';
-import Drone from './DroneModel';
+import Drone from "./Drone";
 
 interface AuditLogAttributes {
     droneSerialNumber: string;
@@ -9,10 +9,16 @@ interface AuditLogAttributes {
 }
 
 class AuditLog extends Model<AuditLogAttributes> implements AuditLogAttributes {
-
     public droneSerialNumber!: string;
     public batteryLevel!: number;
     public timestamp!: Date;
+
+    public static associate(models: any): void {
+        AuditLog.belongsTo(models.Drone, {
+            foreignKey: 'droneSerialNumber',
+            as: 'auditLogs',
+        });
+    }
 }
 
 AuditLog.init(

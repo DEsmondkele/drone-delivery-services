@@ -24,16 +24,46 @@ class DroneController {
     }
 
     async loadMedications(req: Request, res: Response) {
-        const { droneSerialNumber, medicationIds } = req.body;
+        const { droneSerialNumber} = req.body;
         try {
-            const message = await DroneService.loadMedications(droneSerialNumber, medicationIds);
+            const message = await DroneService.loadMedicationsForDrone(droneSerialNumber);
             res.status(200).send({ message });
         } catch (error) {
             console.error('Error loading medication:', error);
             res.status(500).send({ error: 'Internal Server error' });
         }
     }
+    async getLoadedMedications(req: Request, res: Response) {
+        const { droneSerialNumber } = req.params;
+        try {
+            const loadedMedications = await DroneService.getLoadedMedications(droneSerialNumber);
+            res.status(200).send({ data: loadedMedications, message: 'Loaded medications fetched successfully' });
+        } catch (error) {
+            console.error('Error fetching loaded medications:', error);
+            res.status(500).send({ error: 'Internal Server error' });
+        }
+    }
 
+    async getAvailableDrones(req: Request, res: Response) {
+        try {
+            const availableDrones = await DroneService.getAvailableDrones();
+            res.status(200).send({ data: availableDrones, message: 'Available drones fetched successfully' });
+        } catch (error) {
+            console.error('Error fetching available drones:', error);
+            res.status(500).send({ error: 'Internal Server error' });
+        }
+    }
+
+    async getBatteryLevel(req: Request, res: Response) {
+        const { droneSerialNumber } = req.params;
+        try {
+            const batteryLevel = await DroneService.getBatteryLevel(droneSerialNumber);
+            res.status(200).send({ data: batteryLevel, message: 'Battery level fetched successfully' });
+        } catch (error) {
+            console.error('Error fetching battery level:', error);
+            res.status(500).send({ error: 'Internal Server error' });
+        }
+    }
 
 }
 

@@ -41,51 +41,13 @@ class DroneController {
     }
     loadMedications(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { droneSerialNumber, medicationIds } = req.body;
+            const { droneSerialNumber } = req.body;
             try {
-                const message = yield droneService_1.default.loadMedications(droneSerialNumber, medicationIds);
+                const message = yield droneService_1.default.loadMedicationsForDrone(droneSerialNumber);
                 res.status(200).send({ message });
             }
             catch (error) {
                 console.error('Error loading medication:', error);
-                res.status(500).send({ error: 'Internal Server error' });
-            }
-        });
-    }
-    getLoadedMedications(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { droneSerialNumber } = req.params;
-            try {
-                const loadedMedications = yield droneService_1.default.getLoadedMedications(droneSerialNumber);
-                res.status(200).send({ data: loadedMedications, message: 'Loaded medications fetched successfully' });
-            }
-            catch (error) {
-                console.error('Error fetching loaded medications:', error);
-                res.status(500).send({ error: 'Internal Server error' });
-            }
-        });
-    }
-    getAvailableDrones(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const availableDrones = yield droneService_1.default.getAvailableDrones();
-                res.status(200).send({ data: availableDrones, message: 'Available drones fetched successfully' });
-            }
-            catch (error) {
-                console.error('Error fetching available drones:', error);
-                res.status(500).send({ error: 'Internal Server error' });
-            }
-        });
-    }
-    getBatteryLevel(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { droneSerialNumber } = req.params;
-            try {
-                const batteryLevel = yield droneService_1.default.getBatteryLevel(droneSerialNumber);
-                res.status(200).send({ data: batteryLevel, message: 'Battery level fetched successfully' });
-            }
-            catch (error) {
-                console.error('Error fetching battery level:', error);
                 res.status(500).send({ error: 'Internal Server error' });
             }
         });

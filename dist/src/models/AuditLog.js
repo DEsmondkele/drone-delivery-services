@@ -7,6 +7,12 @@ const sequelize_1 = require("sequelize");
 const config_1 = require("../config");
 const DroneModel_1 = __importDefault(require("./DroneModel"));
 class AuditLog extends sequelize_1.Model {
+    static associate(models) {
+        AuditLog.belongsTo(models.Drone, {
+            foreignKey: 'droneSerialNumber',
+            as: 'auditLogs',
+        });
+    }
 }
 AuditLog.init({
     droneSerialNumber: {

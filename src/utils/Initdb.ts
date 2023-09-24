@@ -1,16 +1,19 @@
-// init.ts
+
 import { sequelize } from '../config';
 
-import Medication from '../models/MedicationModel';
-import Drone from '../models/DroneModel';
+import Medication from '../models/Medication';
+import Drone from '../models/Drone';
+import AuditLog from "../models/AuditLog";
 
-// Define an initialization function
 async function initializeDatabase() {
     try {
-        // Sync the models with the database
-        await sequelize.sync({ force: true }); // The 'force' option recreates tables (use with caution)
+        await sequelize.sync({ force: true });
 
-        // Additional initialization logic can go here, e.g., preloading data
+        Medication.associate({ Drone });
+        Drone.associate({ Medication });
+        AuditLog.associate({Drone});
+
+        // TODO initialization logic can go here, e.g., preloading data
 
         console.log('Database initialized successfully');
     } catch (error) {
@@ -18,5 +21,4 @@ async function initializeDatabase() {
     }
 }
 
-// Export the initialization function
 export default initializeDatabase;
