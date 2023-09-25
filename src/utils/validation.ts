@@ -1,4 +1,3 @@
-// validation.ts
 import Joi from 'joi';
 
 // Define validation schemas for request bodies

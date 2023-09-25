@@ -1,9 +1,9 @@
 // medicationService.ts
-import Medication, { MedicationInput, MedicationOutput } from '../models/MedicationModel';
+import Medication from '../models/MedicationModel';
 import { medicationSchema } from '../utils/validation';
 
 class MedicationService {
-    async createMedication(data: MedicationInput): Promise<MedicationOutput> {
+    async createMedication(data: any): Promise<any> {
         // Validate the input data
         const { error } = medicationSchema.validate(data);
         if (error) {
@@ -13,7 +13,7 @@ class MedicationService {
         return await Medication.create(data);
     }
 
-    async getAllMedications(): Promise<MedicationOutput[]> {
+    async getAllMedications(): Promise<any[]> {
         return await Medication.findAll();
     }
 }

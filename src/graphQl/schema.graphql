@@ -1,0 +1,32 @@
+type Drone {
+    id: ID!
+    serialNumber: String!
+    model: String!
+    weightLimit: Int!
+    batteryCapacity: Int!
+    state: String!
+    medication: Medication
+}
+
+type Medication {
+    id: ID!
+    name: String!
+    weight: Int!
+    code: String!
+    image: String!
+}
+
+type AuditLog {
+    id: ID!
+    droneSerialNumber: String!
+    batteryLevel: Int!
+    timestamp: String! # Represent the timestamp as a string in ISO 8601 format
+}
+
+type Query {
+    drones: [Drone]
+    medications: [Medication]
+    auditLog: [AuditLog]
+}
+
+
