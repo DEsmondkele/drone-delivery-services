@@ -1,4 +1,5 @@
-import Medication from '../models/Medication';
+// medicationService.ts
+import Medication from '../models/MedicationModel';
 import { medicationSchema } from '../utils/validation';
 
 class MedicationService {

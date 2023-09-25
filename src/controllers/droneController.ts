@@ -22,7 +22,6 @@ class DroneController {
             res.status(500).send({ error: 'Internal Server Error' });
         }
     }
-
     async loadMedications(req: Request, res: Response) {
         const { droneSerialNumber} = req.body;
         try {
@@ -64,7 +63,6 @@ class DroneController {
             res.status(500).send({ error: 'Internal Server error' });
         }
     }
-
 }
 
 export default new DroneController();
