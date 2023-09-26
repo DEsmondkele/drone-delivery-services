@@ -1,7 +1,7 @@
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../config';
-import Medication from "./MedicationModel";
-import AuditLog from "./AuditLog";
+import Medication from './MedicationModel';
+import AuditLog from './AuditLog';
 
 class Drone extends Model {
     // Define your Medication model attributes here
@@ -12,6 +12,7 @@ class Drone extends Model {
     public batteryCapacity!: number;
     public state!: string;
     public medication!: Medication| null;
+    public auditLog!: AuditLog| null;
 
 
     static initModel(sequelize: any) {
@@ -41,6 +42,9 @@ class Drone extends Model {
      medication:{
       type:DataTypes.JSON,
      },
+      auditLog:{
+        type:DataTypes.JSON,
+      }
             },
             {
                 sequelize,

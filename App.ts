@@ -3,10 +3,7 @@ import bodyParser from 'body-parser';
 import medicationRoutes from './src/routes/medicationRoutes';
 import droneRoutes from './src/routes/droneRoutes';
 import DroneService from './src/services/droneService';
-import { graphqlHTTP } from 'express-graphql';
-import { makeExecutableSchema } from 'graphql-tools';
-import typeDefs from './src/graphQl/mutations';
-import resolvers from './src/graphQl/resolvers';
+import initializeDatabase from './src/utils/initdb';
 
 const app = express();
 const port = 3000;
@@ -17,23 +14,13 @@ app.use(bodyParser.json());
 app.use('/api', medicationRoutes);
 app.use('/api', droneRoutes);
 
-// const schema = makeExecutableSchema({
-//     typeDefs,
-//     resolvers,
-// });
-//
-// app.use(
-//     '/graphql',
-//     graphqlHTTP({
-//         schema,
-//         graphiql: true,
-//     })
-// );
+initializeDatabase().then(() => {
+    console.log('Database initialized with dummy data.');
 
-app.listen(port, async () => {
-    console.log(`Server is running on port ${port}`);
+    app.listen(port, async () => {
+        console.log(`Server is running on port ${port}`);
+    });
 });
-
 const performBatteryCheck = async () => {
     try {
         // Get a list of all drones

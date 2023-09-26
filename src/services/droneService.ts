@@ -96,7 +96,7 @@ class DroneService {
 
     async getAvailableDrones() {
         try {
-            // Find drones that are available for loading (state is IDLE)
+            // Finding drones that are available for loading (state is IDLE)
             const availableDrones = await Drone.findAll({
                 where: { state: 'IDLE' },
             });
@@ -109,7 +109,7 @@ class DroneService {
 
     async getBatteryLevel(droneSerialNumber: string) {
         try {
-            // Find the drone by serial number
+            // Finding the drone by it's serial number
             const drone = await Drone.findOne({
                 where: { serialNumber: droneSerialNumber },
             });
@@ -118,7 +118,7 @@ class DroneService {
                 throw new Error('Drone not found');
             }
 
-            // Retrieve the battery level of the drone
+            // Retrieving the battery level of the drone
             const batteryLevel = drone.batteryCapacity;
 
             return batteryLevel;
