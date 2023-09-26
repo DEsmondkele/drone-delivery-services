@@ -4,7 +4,6 @@ import Medication from './MedicationModel';
 import AuditLog from './AuditLog';
 
 class Drone extends Model {
-    // Define your Medication model attributes here
     public id!: number;
     public serialNumber!: string;
     public model!: string;
@@ -53,6 +52,7 @@ class Drone extends Model {
         );
     }
 }
+
 Drone.initModel(sequelize);
 
 export default Drone;

@@ -3,18 +3,13 @@ import Drone from "./DroneModel";
 import { sequelize } from '../config';
 
 class Medication extends Model {
-    // Define your Medication model attributes here
     public id!: number;
     public name!: string;
     public weight!: number;
     public code!: string;
     public image!: string;
+    public droneSerialNumber!: string;
 
-    // You can also define associations here if needed
-
-    // ...
-
-    // Initialize the Medication model
     static initModel(sequelize: any) {
         Medication.init(
             {
@@ -39,6 +34,7 @@ class Medication extends Model {
                     type: DataTypes.STRING,
                     allowNull: false,
                 },
+                droneSerialNumber: DataTypes.STRING,
             },
             {
                 sequelize,
@@ -46,6 +42,7 @@ class Medication extends Model {
             }
         );
     }
+
 }
 
 Medication.initModel(sequelize);

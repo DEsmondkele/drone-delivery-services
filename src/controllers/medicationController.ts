@@ -14,7 +14,6 @@ class MedicationController {
         }
     }
 
-    // TODO Implement other methods for managing medications
     async getAllMedications(req: Request, res: Response) {
         try {
             const medications = await MedicationService.getAllMedications();
