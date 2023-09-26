@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-// Defining validation schemas for request bodies
+
 const droneSchema = Joi.object({
     serialNumber: Joi.string().max(100).required(),
     model: Joi.string().valid('Lightweight', 'Middleweight', 'Cruiserweight', 'Heavyweight').required(),
