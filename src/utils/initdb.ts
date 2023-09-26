@@ -2,16 +2,16 @@ import { sequelize } from '../config';
 import Medication from '../models/MedicationModel';
 import Drone from '../models/DroneModel';
 import AuditLog from '../models/AuditLog';
-import { dummyDrones, dummyMedications } from './testData'; // Import the dummy data
+import { dummyDrones, dummyMedications } from './testData';
 
-// Defining the associations between models
+
 Medication.belongsTo(Drone, {
-    foreignKey: 'medicationId',
+    foreignKey: 'droneSerialNumber',
     as: 'drones',
 });
 
 Drone.hasOne(Medication, {
-    foreignKey: 'medicationId',
+    foreignKey: 'droneSerialNumber',
     as: 'medications',
 });
 
@@ -21,15 +21,14 @@ Drone.hasOne(AuditLog, {
 
 async function initializeDatabase() {
     try {
-        // Sync the models with the database
+
         await sequelize.sync({ force: true });
 
-        // Insert dummy data for Drones
+
         for (const droneData of dummyDrones) {
             await Drone.create(droneData);
         }
 
-        // Insert dummy data for Medications
         for (const medicationData of dummyMedications) {
             await Medication.create(medicationData);
         }
